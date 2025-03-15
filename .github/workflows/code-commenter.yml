@@ -1,0 +1,42 @@
+name: AI Code Commenter
+
+on:
+  pull_request:
+    paths:
+      - "**/*.py" # Runs only when Python files are modified in a PR
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Set OpenAI API Key
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: echo "API Key set"
+
+    - name: Run AI Code Commenter
+      run: python3 commenter/cli.py sample.py
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add .
+        git commit -m " Automated AI docstring added" || echo "No changes to commit"
+        git push
+
+        
+    
