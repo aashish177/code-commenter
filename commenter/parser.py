@@ -23,7 +23,6 @@ class CodeParser(ast.NodeTransformer):
 
         result = response.choices[0].message.content.strip()
         print(result) 
-        
         return result
 
     def visit_FunctionDef(self, node):    
@@ -56,8 +55,9 @@ def insert_docstrings_in_code(code:str):
 
     parser = CodeParser(client)
     new_tree = parser.visit(tree)
-    return ast.unparse(new_tree) # Converts AST back to source code
+    updatedCode = ast.unparse(new_tree) # Converts AST back to source code s
 
+    return updatedCode
 
 if __name__ == "__main__":
     sample_code = """
