@@ -33,7 +33,7 @@ pipeline {
                     git config --global user.email "jenkins@ci.com"
                     git add .
                     git commit -m "Auto-generate AI  docstrings" || echo " No changes detected"
-                    git push origin HEAD:{GIT_BRANCH}
+                    git push origin HEAD:main
                 '''
             }
         }
