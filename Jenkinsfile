@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/aashish177/code-commenter.git'
+            git credentialsId: 'github-credentials', branch: 'main', url: 'https://github.com/aashish177/code-commenter.git'
             }
         }
 
