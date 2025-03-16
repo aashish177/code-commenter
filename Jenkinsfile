@@ -19,6 +19,13 @@ pipeline {
             }
         }
 
+        stage('Run AI Code Commenter') {
+            steps {
+                sh 'source venv/bin/activate && python3 commenter/cli.py sample.py test_script.py'
+            }
+        }
+
+
         stage('Commit and Push Changes') {
             steps {
                 sh '''
