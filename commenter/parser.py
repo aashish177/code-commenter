@@ -16,7 +16,7 @@ class CodeParser(ast.NodeTransformer):
         prompt += f"def {function_details['name']}({', '.join(function_details['args'])}):\n"
 
         response = self.client.chat.completions.create(
-            model = "gpt-3.5-turbo", # Change model if needed
+            model = "gpt-4-turbo", # Change model if needed
             messages = [{"role": "user", "content": prompt}],
             max_tokens = 100
         )

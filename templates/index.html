@@ -1,0 +1,89 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name=""viewport" content="width=device-width, initial-scale=1.0">
+        <title>AI Code Commenter</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 50px;
+            }
+            textarea {
+                width: 80%;
+                height: 200px;
+            }
+            button {
+                margin-top: 10px;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            pre {
+                text-align: left;
+                background: #f4f4f4;
+                padding: 10px;
+                border-radius: 5px;
+                width: 80%;
+                margin: auto;
+                white-space: pre-wrap;
+            }
+        </style>
+    </head>
+    <body>
+        <h1> AI Code Commenter </h1>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="file" id="fileInput" accept=".py">
+            <br>
+            <button type="submit">Upload and Process</button>
+        </form>
+
+        <h2>Updated Code:</h2>
+        <pre id="output"></pre>
+
+        <script>
+            document.getElementById("uploadForm").onsubmit = async function(event) {
+                event.preventDefault();
+                let formData = new FormData();
+                let fileInput = document.getElementById("fileInput");
+
+                if (fileInput.files.length === 0) {
+                    alert("Please select a Python file to upload.")
+                    return;
+                }
+
+                formData.append("file", fileInput.files[0]);
+
+                let response = await fetch("/upload", {
+                    method: "POST",
+                    body: formData
+                });
+
+                let data = await response.json();
+                document.getElementById("output").innerText = data.updated_code || data.error;
+            }
+        </script>
+
+        <!-- <form id="codeForm">
+            <textarea name="code" id="code" placeholder="Paste your Python code here..."></textarea>
+            <br>
+            <button type="submit">Generate Docstrings</button>
+        </form>
+        <h2>Updated Code:</h2>
+        <pre id="output"></pre> -->
+
+        <!-- <script>
+            document.getElementById("codeForm").onsubmit = async function(event) {
+                event.preventDefault();
+                let formData = new FormData(event.target)
+                let response = await fetch("/process", {
+                    method: "POST",
+                    body: formData
+                });
+                let data = await response.json();
+                document.getElementById("output").innerText = data.updated_code || data.error;
+            };
+        </script> -->
+    </body>
+</html>
