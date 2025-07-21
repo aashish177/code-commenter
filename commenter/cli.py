@@ -17,14 +17,14 @@ def process(files):
         print(updated_code)
 
         if updated_code == code:
-            click.echo("⚠️ No changes made. (File might already have docstrings or AI did not generate new ones.)")
+            click.echo("No changes made. (File might already have docstrings or AI did not generate new ones.)")
         else:
-            click.echo("✅ Changes detected! Writing to file...")
+            click.echo("Changes detected! Writing to file...")
 
         with open(file, "w") as f:
             f.write(updated_code)
 
-        click.echo(f"✅ Successfully updated docstrings in {file}")
+        click.echo(f"Successfully updated docstrings in {file}")
 
 if __name__ == "__main__":
     process()
