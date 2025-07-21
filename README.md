@@ -13,11 +13,3 @@ A lightweight, extensible tool that auto-generates meaningful inline comments an
 - **Flask Web App** to upload `.py` files and get annotated output
 
 ---
-
-## Quick Start
-
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/aashish177/code-commenter.git
-cd code-commenter
