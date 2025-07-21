@@ -2,7 +2,7 @@ import openai
 import os
 
 api_key = os.getenv("OPENAI_API_KEY")
-client = openai.Client(api_key=api_key)  # Replace manually for debugging
+client = openai.Client(api_key=api_key)
 
 models = client.models.list()
 
